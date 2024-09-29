@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 
 export default function TodoInput(props) {
     const {handleAddTodos, type, setType} = props;
@@ -13,8 +12,12 @@ export default function TodoInput(props) {
     } */
     return (
         <header>
-        <input type='text' name='to-do-input' value={type} placeholder='Enter to-do...' onChange={(event)=>setType(event.target.value)}/>
-        <button onClick={()=>{type.length ? handleAddTodos(type):null}}>Add</button>
+        <input type='text' name='to-do-input' value={type} placeholder='Enter to-do...' onChange={(event)=>setType(event.target.value)}
+        onKeyDown={(e) => {
+        if (e.key === "Enter")
+            handleAddTodos(type);
+        }} />
+        <button onClick={()=>{type.length ? handleAddTodos(type) :null; setType('');}}>Add</button>
         
         </header>
     )
